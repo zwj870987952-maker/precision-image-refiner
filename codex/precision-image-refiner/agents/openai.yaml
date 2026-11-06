@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品图精准精修"
+  short_description: "保持产品与构图，局部重绘真实材质，并按需导出 4K/5K 超分图"
+  default_prompt: "使用 $precision-image-refiner 精修这张产品图：保持主体、文字与构图，改善指定区域的材质真实感，并按我要求的尺寸交付。"

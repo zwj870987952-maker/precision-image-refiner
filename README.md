@@ -123,6 +123,26 @@ precision-image-refiner/
 
 ---
 
+## Codex 适配版
+
+`codex/precision-image-refiner/` 是独立的 Codex skill 包，包含 Codex 图片工具调用说明、`agents/openai.yaml` 界面配置、提示词参考和修正后的本地超分脚本。仓库根目录保留原通用/Gemini 版本。
+
+在仓库根目录运行以下 PowerShell 命令安装到 Codex 的 skills 目录：
+
+```powershell
+$codexSkillRoot = if ($env:CODEX_HOME) { Join-Path $env:CODEX_HOME 'skills' } else { Join-Path $env:USERPROFILE '.codex/skills' }
+New-Item -ItemType Directory -Force -Path $codexSkillRoot | Out-Null
+Copy-Item -LiteralPath './codex/precision-image-refiner' -Destination $codexSkillRoot -Recurse -Force
+```
+
+在 Codex 中调用：
+
+```text
+使用 $precision-image-refiner 精修这张产品图，保持产品、文字和构图。
+```
+
+本地超分仅在用户需要时执行，复用可用 Python 环境及本地 x4 ONNX 模型。新版按长边 3840/5120 像素导出 4K/5K 图片，记录实际尺寸和额外插值情况，背景平滑需明确蒙版。依赖、模型与选项详见 [超分说明](codex/precision-image-refiner/references/super_resolution.md)。
+
 ## 📜 许可证
 
 本项目基于 [MIT 许可证](LICENSE) 开源。欢迎集成到任何 AI Agent、自动化工作流或商业修图流水线中！
